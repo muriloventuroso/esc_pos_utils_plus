@@ -520,11 +520,12 @@ class Generator {
               text: '', width: cols[i].width, styles: cols[i].styles));
         }
         // end rows splitting
-        bytes += _text(encodedToPrint,
-            styles: cols[i].styles,
-            colInd: colInd,
-            colWidth: cols[i].width,
-            isKanji: true);
+        bytes += _text(
+          encodedToPrint,
+          styles: cols[i].styles,
+          colInd: colInd,
+          colWidth: cols[i].width,
+        );
       } else {
         // CASE 1: containsChinese = true
         // Split text into multiple lines if it too long
