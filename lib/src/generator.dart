@@ -66,8 +66,6 @@ class Generator {
         .replaceAll(" ", ' ')
         .replaceAll("•", '.');
     if (!isKanji) {
-      text = text.replaceAll(
-          RegExp('[^A-Za-z0-9!"#\$%&\'\n()*+,./:;<=>?@\^_`{|}~-]'), ' ');
       return latin1.encode(text);
     } else {
       return Uint8List.fromList(gbk_bytes.encode(text));
@@ -355,8 +353,6 @@ class Generator {
   }) {
     List<int> bytes = [];
     if (!containsChinese) {
-      text = text.replaceAll(
-          RegExp('[^A-Za-z0-9!"#\$%&\'\n()*+,./:;<=>?@\^_`{|}~-]'), ' ');
       bytes += _text(
         _encode(text, isKanji: containsChinese),
         styles: styles,
@@ -484,7 +480,7 @@ class Generator {
           _colIndToPosition(colInd + cols[i].width) - spaceBetweenRows;
       int maxCharactersNb = ((toPos - fromPos) / charWidth).floor();
 
-      if (true) {
+      if (!cols[i].containsChinese) {
         // CASE 1: containsChinese = false
         Uint8List encodedToPrint = cols[i].textEncoded != null
             ? cols[i].textEncoded!
